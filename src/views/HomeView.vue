@@ -1,31 +1,33 @@
 <template>
   <div class="home">
-    <p ref="p">My name is {{ name }} and I am {{ age }} years old.</p>
-    <button @click="handleClick">Click Me</button>
-    <button @click="age++">Add age by 1</button>
-    <input type="text" v-model="name">
+    <h1>Refs</h1>
+    <p >{{ ninjaOne.name }} - {{ninjaOne.age }}</p>
+    <button @click="updateNinjaOne">Update Ninja One</button>
+    <h1>Reactive</h1>
+    <p >{{ ninjaTwo.name }} - {{ninjaTwo.age }}</p>
+    <button @click="updateNinjaTwo">Update Ninja Two</button>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 export default {
   name: 'HomeView',
   setup() {
 
-    // const p = ref(null)
+    const ninjaOne = ref({name: "Jonny", age: 25})
+    const ninjaTwo = reactive({name: "Bash", age:21})
 
-    const name = ref("Jonny")
-    const age = ref(25)
-
-    const handleClick = () => {
-      name.value = "Gibbz"
-      age.value = 25
-      
+    const updateNinjaOne = () => {
+      ninjaOne.value.age = 35
     }
 
-    return { name, age, handleClick }
+    const updateNinjaTwo = () => {
+      ninjaTwo.age = 25
+    }
+
+    return { ninjaOne, ninjaTwo, updateNinjaOne, updateNinjaTwo}
 
   }
 }
