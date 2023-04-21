@@ -1,33 +1,24 @@
 <template>
   <div class="home">
-    <h1>Refs</h1>
-    <p >{{ ninjaOne.name }} - {{ninjaOne.age }}</p>
-    <button @click="updateNinjaOne">Update Ninja One</button>
-    <h1>Reactive</h1>
-    <p >{{ ninjaTwo.name }} - {{ninjaTwo.age }}</p>
-    <button @click="updateNinjaTwo">Update Ninja Two</button>
+    <h1>Home</h1>
+    <PostList :posts="posts" />
   </div>
 </template>
 
 <script>
+import PostList from '../components/PostList.vue'
 import { ref, reactive } from 'vue'
 
 export default {
   name: 'HomeView',
+  components: { PostList },
   setup() {
+    const posts = ref([
+      { title: "Welcome to the blog", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", id: 1 },
+      { title: "Learn Vue Framework", body: "Lorem Ipsum", id: 2 }
+    ])
 
-    const ninjaOne = ref({name: "Jonny", age: 25})
-    const ninjaTwo = reactive({name: "Bash", age:21})
-
-    const updateNinjaOne = () => {
-      ninjaOne.value.age = 35
-    }
-
-    const updateNinjaTwo = () => {
-      ninjaTwo.age = 25
-    }
-
-    return { ninjaOne, ninjaTwo, updateNinjaOne, updateNinjaTwo}
+    return { posts }
 
   }
 }
